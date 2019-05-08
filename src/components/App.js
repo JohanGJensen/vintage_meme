@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import { styles } from "./style/style.js";
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -54,6 +55,10 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  memeGallery: PropTypes.array.isRequired
+};
 
 const mapStateToProps = state => ({
   memeGallery: state.memeState.memeGallery

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import { galleryStyle } from "../style/style.js";
 import { connect } from "react-redux";
@@ -22,6 +23,10 @@ class Gallery extends Component {
     );
   }
 }
+
+Gallery.propTypes = {
+  memeGallery: PropTypes.array.isRequired
+};
 
 const mapStateToProps = state => ({
   memeGallery: state.memeState.memeGallery

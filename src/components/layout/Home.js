@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 //style
 import injectSheet from "react-jss";
 import { styles } from "../style/style.js";
@@ -145,6 +146,12 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  memeText: PropTypes.string.isRequired,
+  memeGallery: PropTypes.array.isRequired,
+  changeColor: PropTypes.string.isRequired
+};
 
 const mapStateToProps = state => ({
   memeText: state.memeState.memeText,
