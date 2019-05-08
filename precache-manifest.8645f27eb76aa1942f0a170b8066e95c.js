@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "8c915389222e73cf8a67",
+    "revision": "640268520a7fbde1b29d",
     "url": "/vintage_meme/static/css/main.1b4d1fa8.chunk.css"
   },
   {
-    "revision": "8c915389222e73cf8a67",
-    "url": "/vintage_meme/static/js/main.f70d1b45.chunk.js"
+    "revision": "640268520a7fbde1b29d",
+    "url": "/vintage_meme/static/js/main.02791814.chunk.js"
   },
   {
     "revision": "7277603ba7729acad3da",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/vintage_meme/static/media/Righteous-Regular.87c3edb4.ttf"
   },
   {
-    "revision": "37ffcc334bd4ff1872e732944afdb425",
+    "revision": "d10fad7a717f63885d74efec56b88a12",
     "url": "/vintage_meme/index.html"
   }
 ];
