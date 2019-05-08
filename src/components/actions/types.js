@@ -1,0 +1,4 @@
+export const TOGGLE_TITLE_COLOR = "TOGGLE_TITLE_COLOR";
+export const WRITE_MEME_CAPTION = "WRITE_MEME_CAPTION";
+export const SAVE_MEME = "SAVE_MEME";
+export const CHANGE_COLOR = "CHANGE_COLOR";
