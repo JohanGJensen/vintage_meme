@@ -6,7 +6,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 // import { connect } from "react-redux";
 // import { saveMeme } from "../state/actions/actions";
 
-import Home from "./components/Home";
+import VideoEditor from "./pages/VideoEditor";
 
 const App = (props) => {
   const { classes } = props;
@@ -15,8 +15,8 @@ const App = (props) => {
     <div className="main-container">
       <section className={classes.App}>
         <Switch>
-          <Route path="/home" component={Home} />
-          <Redirect to="/home" />
+          <Route path="/main" component={VideoEditor} />
+          <Redirect to="/main" />
         </Switch>
       </section>
     </div>
