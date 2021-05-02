@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./components/App";
-import * as serviceWorker from "./serviceWorker";
+import "./style/style";
+import App from "./layout/App";
+// import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider } from "react-jss";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "./store";
-import { theme } from "./components/style/theme";
+import { store } from "./state/store";
+import { theme } from "./style/theme";
 
-import "./index.css";
+import "./style/index.css";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -25,4 +25,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// serviceWorker.unregister();

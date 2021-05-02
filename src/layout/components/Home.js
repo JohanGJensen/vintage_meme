@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 //style
 import injectSheet from "react-jss";
-import { styles } from "../style/style.js";
+import { styles } from "../../style/style";
 //REDUX
 import { connect } from "react-redux";
-import { writeMemeCaption, saveMeme } from "../actions/actions.js";
+import { writeMemeCaption, saveMeme } from "../../state/actions/actions";
 //font awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //components
@@ -13,7 +13,7 @@ import ColorPanel from "./ColorPanel";
 
 class Home extends Component {
   state = {
-    togglePlay: true
+    togglePlay: true,
   };
 
   handlePlay = () => {
@@ -32,7 +32,7 @@ class Home extends Component {
     }
   };
 
-  handleText = text => {
+  handleText = (text) => {
     const vid = document.getElementById("meme");
     const canvas = document.getElementById("videoCanvas");
     const ctx = canvas.getContext("2d");
@@ -66,7 +66,7 @@ class Home extends Component {
     this.props.saveMeme(image);
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.props.writeMemeCaption(e.target.value);
     this.handleText(e.target.value);
   };
@@ -150,16 +150,15 @@ class Home extends Component {
 Home.propTypes = {
   memeText: PropTypes.string.isRequired,
   memeGallery: PropTypes.array.isRequired,
-  changeColor: PropTypes.string.isRequired
+  changeColor: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   memeText: state.memeState.memeText,
   memeGallery: state.memeState.memeGallery,
-  changeColor: state.memeState.changeColor
+  changeColor: state.memeState.changeColor,
 });
 
-export default connect(
-  mapStateToProps,
-  { writeMemeCaption, saveMeme }
-)(injectSheet(styles)(Home));
+export default connect(mapStateToProps, { writeMemeCaption, saveMeme })(
+  injectSheet(styles)(Home)
+);

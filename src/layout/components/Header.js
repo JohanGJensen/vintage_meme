@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import injectSheet from "react-jss";
-import { headerStyle } from "../style/style.js";
-import { toggleTitleColor } from "../actions/actions.js";
+import { headerStyle } from "../../style/style";
+import { toggleTitleColor } from "../../state/actions/actions";
 import { connect } from "react-redux";
 
 class Header extends Component {
@@ -21,11 +21,10 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  titleColor: state.memeState.titleColor
+const mapStateToProps = (state) => ({
+  titleColor: state.memeState.titleColor,
 });
 
-export default connect(
-  mapStateToProps,
-  { toggleTitleColor }
-)(injectSheet(headerStyle)(Header));
+export default connect(mapStateToProps, { toggleTitleColor })(
+  injectSheet(headerStyle)(Header)
+);

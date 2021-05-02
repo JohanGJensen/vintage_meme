@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 //style
 import injectSheet from "react-jss";
-import { colorPanel } from "../style/style.js";
+import { colorPanel } from "../../style/style";
 //redux
 import { connect } from "react-redux";
-import { changeColorText } from "../actions/actions";
+import { changeColorText } from "../../state/actions/actions";
 
 class ColorPanel extends Component {
-  changeColor = e => {
+  changeColor = (e) => {
     const { classes, changeColorText, theme, memeText } = this.props;
     const color = e.target.className;
 
@@ -56,14 +56,13 @@ class ColorPanel extends Component {
 }
 
 ColorPanel.propTypes = {
-  memeText: PropTypes.string.isRequired
+  memeText: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => ({
-  memeText: state.memeState.memeText
+const mapStateToProps = (state) => ({
+  memeText: state.memeState.memeText,
 });
 
-export default connect(
-  mapStateToProps,
-  { changeColorText }
-)(injectSheet(colorPanel)(ColorPanel));
+export default connect(mapStateToProps, { changeColorText })(
+  injectSheet(colorPanel)(ColorPanel)
+);

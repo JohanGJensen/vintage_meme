@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import injectSheet from "react-jss";
-import { footerStyle } from "../style/style.js";
+import { footerStyle } from "../../style/style";
 import { Link } from "react-router-dom";
 
 class Footer extends Component {

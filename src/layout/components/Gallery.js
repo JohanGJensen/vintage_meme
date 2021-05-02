@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
-import { galleryStyle } from "../style/style.js";
+import { galleryStyle } from "../../style/style";
 import { connect } from "react-redux";
 import uuid from "uuid";
 
@@ -11,7 +11,7 @@ class Gallery extends Component {
 
     return (
       <div className={classes.galleryContainer}>
-        {memeGallery.map(meme => (
+        {memeGallery.map((meme) => (
           <img
             key={uuid()}
             src={meme}
@@ -25,11 +25,11 @@ class Gallery extends Component {
 }
 
 Gallery.propTypes = {
-  memeGallery: PropTypes.array.isRequired
+  memeGallery: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
-  memeGallery: state.memeState.memeGallery
+const mapStateToProps = (state) => ({
+  memeGallery: state.memeState.memeGallery,
 });
 
 export default connect(mapStateToProps)(injectSheet(galleryStyle)(Gallery));

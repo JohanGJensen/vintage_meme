@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
-import { styles } from "./style/style.js";
+import { styles } from "../style/style";
 import { Route, Switch, Redirect } from "react-router-dom";
 //import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { saveMeme } from "./actions/actions.js";
+import { saveMeme } from "../state/actions/actions";
 
 //components
-import Home from "./layout/Home";
-import Gallery from "./layout/Gallery";
-import Readme from "./layout/Readme";
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
+import Home from "./components/Home";
+import Gallery from "./components/Gallery";
+import Readme from "./components/Readme";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 //font awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -20,7 +20,7 @@ import {
   faPlay,
   faPause,
   faDownload,
-  faSave
+  faSave,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(faPlay, faPause, faDownload, faSave);
 
@@ -33,7 +33,7 @@ class App extends Component {
     } else if (localStorage.getItem("memeGallery") !== null) {
       let value = localStorage.getItem("memeGallery");
       value = JSON.parse(value);
-      value.map(meme => saveMeme(meme));
+      value.map((meme) => saveMeme(meme));
     }
   }
 
@@ -57,14 +57,11 @@ class App extends Component {
 }
 
 App.propTypes = {
-  memeGallery: PropTypes.array.isRequired
+  memeGallery: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
-  memeGallery: state.memeState.memeGallery
+const mapStateToProps = (state) => ({
+  memeGallery: state.memeState.memeGallery,
 });
 
-export default connect(
-  mapStateToProps,
-  { saveMeme }
-)(injectSheet(styles)(App));
+export default connect(mapStateToProps, { saveMeme })(injectSheet(styles)(App));
