@@ -1,67 +1,26 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import injectSheet from "react-jss";
 import { styles } from "../style/style";
 import { Route, Switch, Redirect } from "react-router-dom";
-//import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { saveMeme } from "../state/actions/actions";
+// redux
+// import { connect } from "react-redux";
+// import { saveMeme } from "../state/actions/actions";
 
-//components
 import Home from "./components/Home";
-import Gallery from "./components/Gallery";
-import Readme from "./components/Readme";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 
-//font awesome
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faPlay,
-  faPause,
-  faDownload,
-  faSave,
-} from "@fortawesome/free-solid-svg-icons";
-library.add(faPlay, faPause, faDownload, faSave);
+const App = (props) => {
+  const { classes } = props;
 
-class App extends Component {
-  componentDidMount() {
-    const { memeGallery, saveMeme } = this.props;
-
-    if (memeGallery > !-1) {
-      console.log("data fetched through server");
-    } else if (localStorage.getItem("memeGallery") !== null) {
-      let value = localStorage.getItem("memeGallery");
-      value = JSON.parse(value);
-      value.map((meme) => saveMeme(meme));
-    }
-  }
-
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className="main-container">
-        <Header />
-        <section className={classes.App}>
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/gallery" component={Gallery} />
-            <Route path="/readme" component={Readme} />
-            <Redirect to="/home" />
-          </Switch>
-        </section>
-        <Footer />
-      </div>
-    );
-  }
-}
-
-App.propTypes = {
-  memeGallery: PropTypes.array.isRequired,
+  return (
+    <div className="main-container">
+      <section className={classes.App}>
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Redirect to="/home" />
+        </Switch>
+      </section>
+    </div>
+  );
 };
 
-const mapStateToProps = (state) => ({
-  memeGallery: state.memeState.memeGallery,
-});
-
-export default connect(mapStateToProps, { saveMeme })(injectSheet(styles)(App));
+export default injectSheet(styles)(App);
