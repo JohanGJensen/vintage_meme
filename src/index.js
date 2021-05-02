@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./layout/App";
+import PrimaryRoute from "./layout/PrimaryRoute";
 
 import { ThemeProvider } from "react-jss";
 import { Provider } from "react-redux";
@@ -14,7 +14,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <App />
+        <PrimaryRoute />
       </ThemeProvider>
     </Provider>
   </BrowserRouter>,

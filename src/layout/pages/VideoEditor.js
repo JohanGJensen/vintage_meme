@@ -7,14 +7,17 @@ import { styles } from "../../style/style";
 // import { writeMemeCaption, saveMeme } from "../../state/actions/actions";
 // components
 import Video from "../components/Video";
+import SideMenu from "../components/SideMenu";
+import Timeline from "../components/Timeline";
 
 const VideoEditor = (props) => {
   const { classes } = props;
 
   return (
-    <section className={classes.canvasStyle}>
-      <canvas id="videoCanvas" width="1042" height="586" />
+    <section className={classes.editor}>
+      <SideMenu />
       <Video />
+      <Timeline />
     </section>
   );
 };
