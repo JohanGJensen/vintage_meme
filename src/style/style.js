@@ -30,11 +30,19 @@ export const styles = (theme) => ({
     },
   },
   videoPlayerMenu: {
+    display: "flex",
     width: "100%",
     height: "50px",
     background: theme.palette.secondary,
     position: "absolute",
     bottom: "0px",
+    "& .button-set": {
+      display: "flex",
+      "justify-content": "center",
+      "align-items": "center",
+      width: "33%",
+      height: "100%",
+    },
   },
   timeline: {
     position: "absolute",

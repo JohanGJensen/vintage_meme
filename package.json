@@ -4,7 +4,10 @@
   "private": true,
   "homepage": "https://JohanGJensen.github.io/vintage_meme",
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "gh-pages": "^2.0.1",
+    "install": "^0.13.0",
+    "npm": "^7.11.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-jss": "^8.6.1",
@@ -12,8 +15,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "^4.0.3",
     "redux": "^4.0.1",
-    "tar": "^4.4.8",
-    "uuid": "^3.3.2"
+    "tar": "^4.4.8"
   },
   "scripts": {
     "start": "react-scripts start",
