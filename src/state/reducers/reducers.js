@@ -1,13 +1,13 @@
 import * as actionType from "../actions/types";
 
-const defaultState = {
+const initialState = {
   titleColor: "primary",
   memeText: "",
   memeGallery: [],
-  changeColor: "white",
+  duration: "white",
 };
 
-export function memeState(state = defaultState, action) {
+export function videoState(state = initialState, action) {
   switch (action.type) {
     case actionType.TOGGLE_TITLE_COLOR:
       return {
@@ -21,8 +21,8 @@ export function memeState(state = defaultState, action) {
         ...state,
         memeGallery: [...state.memeGallery, action.payload],
       };
-    case actionType.CHANGE_COLOR:
-      return { ...state, changeColor: action.payload };
+    case actionType.CHANGE_DURATION:
+      return { ...state, duration: action.payload };
 
     default:
       return state;
