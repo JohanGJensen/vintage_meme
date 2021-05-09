@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useRef } from "react";
 // style
 import injectSheet from "react-jss";
 import { styles } from "../../style/style";
@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import VideoPlayerPin from "./VideoPlayerPin";
 
 const Timeline = (props) => {
+  const timelineEl = useRef(null);
   const [animation, setAnimation] = useState(undefined);
 
   const { classes, video = null } = props;
@@ -52,6 +53,7 @@ const Timeline = (props) => {
         </code>
       </div>
       <div
+        ref={timelineEl}
         style={{
           width: "98%",
           height: "300px",
@@ -69,7 +71,7 @@ const Timeline = (props) => {
             borderRadius: "15px 15px 0 0",
           }}
         >
-          <VideoPlayerPin />
+          {timelineEl && <VideoPlayerPin parent={timelineEl.current} />}
         </div>
       </div>
     </section>
