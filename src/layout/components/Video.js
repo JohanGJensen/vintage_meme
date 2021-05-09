@@ -20,17 +20,20 @@ const films = [
 const Video = (props) => {
   const dispatch = useDispatch();
 
-  const videoEl = React.useRef(null);
+  const [videoEl, setVideoEl] = React.useState(null);
   const currentFilm = films[0];
-  const { classes } = props;
+  const { classes, setVideo } = props;
 
   useEffect(() => {
     const onReadyStateChange = () => {
-      if (videoEl.current.readyState === 4)
+      if (videoEl && videoEl.readyState === 4) {
         dispatch({
           type: "CHANGE_DURATION",
-          payload: videoEl.current.duration,
+          payload: videoEl.duration,
         });
+
+        setVideo(videoEl);
+      }
     };
 
     document.addEventListener("readystatechange", onReadyStateChange);
@@ -38,14 +41,14 @@ const Video = (props) => {
     return () => {
       document.removeEventListener("readystatechange", onReadyStateChange);
     };
-  }, []);
+  }, [videoEl, dispatch, setVideo]);
 
   return (
     <section className={classes.video}>
-      <video ref={videoEl} crossOrigin="anonymous" id="video" muted>
+      <video loop ref={setVideoEl} crossOrigin="anonymous" id="video" muted>
         <source src={currentFilm.source} type={currentFilm.type} />
       </video>
-      <VideoPlayerMenu />
+      <VideoPlayerMenu player={videoEl} />
     </section>
   );
 };

@@ -51,4 +51,26 @@ export const styles = (theme) => ({
     width: "100%",
     height: theme.sizing.editorBlockHeight - 20,
   },
+  playerpin: {
+    position: "absolute",
+    top: "30px",
+    width: "2px",
+    height: "270px",
+    background: "#FF0000",
+    cursor: "pointer",
+
+    "&:before": {
+      position: "absolute",
+      content: "''",
+      top: "-5px",
+      left: "-4px",
+      background: "#FF0000",
+      display: "inline-block",
+      width: "10px",
+      height: "10px",
+
+      transform: "rotate(45deg)",
+      "-webkit-transform": "rotate(45deg)",
+    },
+  },
 });
