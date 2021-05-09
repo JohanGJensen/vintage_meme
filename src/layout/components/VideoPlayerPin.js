@@ -9,7 +9,7 @@ const VideoPlayerPin = (props) => {
   const [playerpin, setPlayerpin] = useState(null);
   const [xPos, setXPos] = useState(0);
 
-  const { classes, parent } = props;
+  const { classes, parent = null, video = null } = props;
 
   const onMouseDown = () => setDragging(true);
   const onMouseUp = () => setDragging(false);
@@ -22,7 +22,12 @@ const VideoPlayerPin = (props) => {
       let x = e.clientX - offsetLeft;
 
       if (dragging && parent.clientWidth > x && x > 0) {
-        setXPos((100 / parent.clientWidth) * x);
+        let percent = (100 / parent.clientWidth) * x;
+        setXPos(percent);
+
+        if (video) {
+          video.currentTime = (video.duration * percent) / 100;
+        }
       }
     };
 
@@ -41,7 +46,7 @@ const VideoPlayerPin = (props) => {
       parent?.removeEventListener("mouseup", onMouseUp);
       parent?.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [playerpin, parent, dragging]);
+  }, [playerpin, parent, dragging, video]);
 
   return (
     <div

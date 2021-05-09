@@ -71,7 +71,9 @@ const Timeline = (props) => {
             borderRadius: "15px 15px 0 0",
           }}
         >
-          {timelineEl && <VideoPlayerPin parent={timelineEl.current} />}
+          {timelineEl && (
+            <VideoPlayerPin parent={timelineEl.current} video={video} />
+          )}
         </div>
       </div>
     </section>
