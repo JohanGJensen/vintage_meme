@@ -10,11 +10,7 @@ const VideoPlayerPin = (props) => {
   const { classes } = props;
 
   useEffect(() => {
-    const onMovePin = (e) => {
-      let progress = e.detail;
-
-      setXPos(progress);
-    };
+    const onMovePin = (e) => setXPos(e.detail); // e.detail = progress
 
     document.addEventListener("movepin", onMovePin);
     return () => document.removeEventListener("movepin", onMovePin);
