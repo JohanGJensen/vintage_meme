@@ -1,20 +1,20 @@
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 // style
 import injectSheet from "react-jss";
 import { styles } from "../../style/style";
 // redux
 import { useSelector } from "react-redux";
+// components
+import VideoPlayerPin from "./VideoPlayerPin";
 
 const Timeline = (props) => {
   const [animation, setAnimation] = useState(undefined);
-  const [playerpin, setPlayerpin] = useState(null);
-  const [xPos, setXPos] = useState(0);
 
   const { classes, video = null } = props;
   const duration = useSelector((state) => state.duration);
 
   useLayoutEffect(() => {
-    if (!video || !playerpin) return;
+    if (!video) return;
 
     const updatePinPosition = () => {
       const time = video.currentTime;
@@ -22,7 +22,6 @@ const Timeline = (props) => {
       const pinEvent = new CustomEvent("movepin", { detail: progress });
 
       if (100 >= progress || video.paused) {
-        // setXPos(progress);
         document.dispatchEvent(pinEvent);
         setAnimation(requestAnimationFrame(updatePinPosition));
       }
@@ -44,17 +43,6 @@ const Timeline = (props) => {
       video.removeEventListener("pause", onPause);
     };
   }, [video, animation, duration]);
-
-  useEffect(() => {
-    const onMovePin = (e) => {
-      let progress = e.detail;
-
-      setXPos(progress);
-    };
-
-    document.addEventListener("movepin", onMovePin);
-    return () => document.removeEventListener("movepin", onMovePin);
-  }, [playerpin]);
 
   return (
     <section className={classes.timeline}>
@@ -81,12 +69,7 @@ const Timeline = (props) => {
             borderRadius: "15px 15px 0 0",
           }}
         >
-          <div
-            id={"playerpin"}
-            ref={setPlayerpin}
-            className={classes.playerpin}
-            style={{ left: xPos + "%" }}
-          ></div>
+          <VideoPlayerPin />
         </div>
       </div>
     </section>
