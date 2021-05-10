@@ -9,3 +9,8 @@ export const changeDuration = (payload) => ({
   type: actionType.CHANGE_DURATION,
   payload: payload,
 });
+
+export const changeVideo = (payload) => ({
+  type: actionType.CHANGE_VIDEO,
+  payload: payload,
+});

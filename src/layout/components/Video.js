@@ -22,7 +22,7 @@ const Video = (props) => {
 
   const [videoEl, setVideoEl] = React.useState(null);
   const currentFilm = films[0];
-  const { classes, setVideo } = props;
+  const { classes } = props;
 
   useEffect(() => {
     const onReadyStateChange = () => {
@@ -32,7 +32,7 @@ const Video = (props) => {
           payload: videoEl.duration,
         });
 
-        setVideo(videoEl);
+        dispatch({ type: "CHANGE_VIDEO", payload: videoEl });
       }
     };
 
@@ -41,7 +41,7 @@ const Video = (props) => {
     return () => {
       document.removeEventListener("readystatechange", onReadyStateChange);
     };
-  }, [videoEl, dispatch, setVideo]);
+  }, [videoEl, dispatch]);
 
   return (
     <section className={classes.video}>

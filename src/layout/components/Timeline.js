@@ -11,18 +11,19 @@ const Timeline = (props) => {
   const timelineEl = useRef(null);
   const [animation, setAnimation] = useState(undefined);
 
-  const { classes, video = null } = props;
-  const duration = useSelector((state) => state.duration);
+  const { classes } = props;
+  const state = useSelector((state) => state);
+  const { selectedVideo, duration } = state;
 
   useLayoutEffect(() => {
-    if (!video) return;
+    if (!selectedVideo) return;
 
     const updatePinPosition = () => {
-      const time = video.currentTime;
-      const progress = (100 / duration) * time;
+      const time = selectedVideo.currentTime;
+      const progress = (100 / selectedVideo.duration) * time;
       const pinEvent = new CustomEvent("movepin", { detail: progress });
 
-      if (100 >= progress || video.paused) {
+      if (100 >= progress || selectedVideo.paused) {
         document.dispatchEvent(pinEvent);
         setAnimation(requestAnimationFrame(updatePinPosition));
       }
@@ -36,20 +37,21 @@ const Timeline = (props) => {
       cancelAnimationFrame(animation);
     };
 
-    video.addEventListener("play", onPlay);
-    video.addEventListener("pause", onPause);
+    selectedVideo.addEventListener("play", onPlay);
+    selectedVideo.addEventListener("pause", onPause);
 
     return () => {
-      video.removeEventListener("play", onPlay);
-      video.removeEventListener("pause", onPause);
+      selectedVideo.removeEventListener("play", onPlay);
+      selectedVideo.removeEventListener("pause", onPause);
     };
-  }, [video, animation, duration]);
+  }, [selectedVideo, animation]);
 
   return (
     <section className={classes.timeline}>
       <div style={{ width: "100%", height: "30px" }}>
         <code>
-          duration: <span style={{ color: "#FF0000" }}>{duration}</span>sec
+          duration: <span style={{ color: "#FF0000" }}>{duration}</span>
+          sec
         </code>
       </div>
       <div
@@ -72,7 +74,7 @@ const Timeline = (props) => {
           }}
         >
           {timelineEl && (
-            <VideoPlayerPin parent={timelineEl.current} video={video} />
+            <VideoPlayerPin parent={timelineEl.current} video={selectedVideo} />
           )}
         </div>
       </div>
