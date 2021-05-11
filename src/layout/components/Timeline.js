@@ -20,7 +20,7 @@ const Timeline = (props) => {
 
     const updatePinPosition = () => {
       const time = selectedVideo.currentTime;
-      const progress = (100 / selectedVideo.duration) * time;
+      const progress = (100 / state.duration) * time;
       const pinEvent = new CustomEvent("movepin", { detail: progress });
 
       if (100 >= progress || selectedVideo.paused) {
