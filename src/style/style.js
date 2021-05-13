@@ -23,6 +23,7 @@ export const styles = (theme) => ({
     "align-items": "center",
     width: "60%",
     height: theme.sizing.editorBlockHeight,
+
     "& video": {
       "max-height": "100%",
       width: "100%",
@@ -36,6 +37,7 @@ export const styles = (theme) => ({
     background: theme.palette.secondary,
     position: "absolute",
     bottom: "0px",
+
     "& .button-set": {
       display: "flex",
       "justify-content": "center",
@@ -50,6 +52,14 @@ export const styles = (theme) => ({
     background: theme.palette.secondary,
     width: "100%",
     height: theme.sizing.editorBlockHeight - 20,
+
+    "& .tracks-container": {
+      width: "98%",
+      height: "300px",
+      background: "#474646",
+      margin: "0 auto",
+      borderRadius: "15px",
+    },
   },
   playerpin: {
     position: "absolute",

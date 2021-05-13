@@ -5,7 +5,17 @@ import { styles } from "../../style/style";
 // components
 import Video from "../components/Video";
 import SideMenu from "../components/SideMenu";
-import Timeline from "../components/Timeline";
+import Timeline from "../components/timeline/Timeline";
+
+const tracks = [
+  {
+    name: "man_with_beer",
+    extension: "webm",
+    type: "video/webm",
+    source:
+      "https://upload.wikimedia.org/wikipedia/en/transcoded/6/61/Old_Man_Drinking_a_Glass_of_Beer_%281897%29.webm/Old_Man_Drinking_a_Glass_of_Beer_%281897%29.webm.360p.webm",
+  },
+];
 
 const VideoEditor = (props) => {
   const { classes } = props;
@@ -13,8 +23,8 @@ const VideoEditor = (props) => {
   return (
     <section className={classes.editor}>
       <SideMenu />
-      <Video />
-      <Timeline />
+      <Video tracks={tracks} />
+      <Timeline tracks={tracks} />
     </section>
   );
 };

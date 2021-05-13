@@ -1,7 +1,7 @@
 import * as actionType from "../actions/types";
 
 const initialState = {
-  duration: 0,
+  duration: 60,
   selectedVideo: null,
 };
 

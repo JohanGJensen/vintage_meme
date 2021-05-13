@@ -7,30 +7,20 @@ import { useDispatch } from "react-redux";
 // components
 import VideoPlayerMenu from "./VideoPlayerMenu";
 
-const films = [
-  {
-    name: "man_with_beer",
-    extension: "webm",
-    type: "video/webm",
-    source:
-      "https://upload.wikimedia.org/wikipedia/en/transcoded/6/61/Old_Man_Drinking_a_Glass_of_Beer_%281897%29.webm/Old_Man_Drinking_a_Glass_of_Beer_%281897%29.webm.360p.webm",
-  },
-];
-
 const Video = (props) => {
   const dispatch = useDispatch();
 
   const [videoEl, setVideoEl] = React.useState(null);
-  const currentFilm = films[0];
-  const { classes } = props;
+  const { classes, tracks } = props;
+  const currentFilm = tracks[0];
 
   useEffect(() => {
     const onReadyStateChange = () => {
       if (videoEl && videoEl.readyState === 4) {
-        dispatch({
-          type: "CHANGE_DURATION",
-          payload: videoEl.duration,
-        });
+        // dispatch({
+        // type: "CHANGE_DURATION",
+        // payload: videoEl.duration,
+        // });
 
         dispatch({ type: "CHANGE_VIDEO", payload: videoEl });
       }

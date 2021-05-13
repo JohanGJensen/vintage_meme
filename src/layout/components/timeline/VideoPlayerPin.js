@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // style
 import injectSheet from "react-jss";
-import { styles } from "../../style/style";
+import { styles } from "../../../style/style";
 
 const VideoPlayerPin = (props) => {
   const [dragging, setDragging] = useState(false);

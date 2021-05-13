@@ -1,19 +1,20 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
 // style
 import injectSheet from "react-jss";
-import { styles } from "../../style/style";
+import { styles } from "../../../style/style";
 // redux
 import { useSelector } from "react-redux";
 // components
 import VideoPlayerPin from "./VideoPlayerPin";
+import TimelineSettings from "./TimelineSettings";
 
 const Timeline = (props) => {
-  const timelineEl = useRef(null);
+  const tracksContainerEl = useRef(null);
   const [animation, setAnimation] = useState(undefined);
 
   const { classes } = props;
   const state = useSelector((state) => state);
-  const { selectedVideo, duration } = state;
+  const { selectedVideo } = state;
 
   useLayoutEffect(() => {
     if (!selectedVideo) return;
@@ -48,22 +49,8 @@ const Timeline = (props) => {
 
   return (
     <section className={classes.timeline}>
-      <div style={{ width: "100%", height: "30px" }}>
-        <code>
-          duration: <span style={{ color: "#FF0000" }}>{duration}</span>
-          sec
-        </code>
-      </div>
-      <div
-        ref={timelineEl}
-        style={{
-          width: "98%",
-          height: "300px",
-          background: "#474646",
-          margin: "0 auto",
-          borderRadius: "15px",
-        }}
-      >
+      <TimelineSettings />
+      <div className={"tracks-container"} ref={tracksContainerEl}>
         <div
           style={{
             position: "relative",
@@ -73,9 +60,10 @@ const Timeline = (props) => {
             borderRadius: "15px 15px 0 0",
           }}
         >
-          {timelineEl && (
-            <VideoPlayerPin parent={timelineEl.current} video={selectedVideo} />
-          )}
+          <VideoPlayerPin
+            parent={tracksContainerEl.current || null}
+            video={selectedVideo}
+          />
         </div>
       </div>
     </section>
