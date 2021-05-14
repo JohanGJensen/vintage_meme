@@ -3,7 +3,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import { styles } from "../../style/style";
 // components
-import Video from "../components/Video";
+import VideoPlayer from "../components/videoPlayer/VideoPlayer";
 import SideMenu from "../components/SideMenu";
 import Timeline from "../components/timeline/Timeline";
 
@@ -23,7 +23,7 @@ const VideoEditor = (props) => {
   return (
     <section className={classes.editor}>
       <SideMenu />
-      <Video tracks={tracks} />
+      <VideoPlayer tracks={tracks} />
       <Timeline tracks={tracks} />
     </section>
   );

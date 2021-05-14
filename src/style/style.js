@@ -54,11 +54,19 @@ export const styles = (theme) => ({
     height: theme.sizing.editorBlockHeight - 20,
 
     "& .tracks-container": {
+      position: "relative",
       width: "98%",
       height: "300px",
       background: "#474646",
       margin: "0 auto",
       borderRadius: "15px",
+
+      "& .tracks-container-header": {
+        width: "100%",
+        height: "30px",
+        background: "#ffffff",
+        borderRadius: "15px 15px 0 0",
+      },
     },
   },
   playerpin: {

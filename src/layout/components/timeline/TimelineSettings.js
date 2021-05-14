@@ -6,7 +6,7 @@ import { styles } from "../../../style/style";
 import { useSelector } from "react-redux";
 
 const TimelineSettings = (props) => {
-  const { classes } = props;
+  // const { classes } = props;
   const duration = useSelector((state) => state.duration);
 
   return (

@@ -1,8 +1,10 @@
 import React from "react";
-//style
+// style
 import injectSheet from "react-jss";
-import { styles } from "../../style/style";
-//icons
+import { styles } from "../../../style/style";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+// icons
 import {
   Replay,
   PlayArrow,
@@ -12,26 +14,23 @@ import {
 } from "@material-ui/icons";
 
 const VideoPlayerMenu = (props) => {
-  const [playing, setPlaying] = React.useState(false);
-  const { classes, player } = props;
+  const dispatch = useDispatch();
+
+  const state = useSelector((state) => state);
+  const { playing } = state;
+  const { classes } = props;
 
   const handlePlay = () => {
-    player?.play();
-    setPlaying(true);
+    dispatch({ type: "CHANGE_PLAYING", payload: true });
   };
 
   const handlePause = () => {
-    player?.pause();
-    setPlaying(false);
+    dispatch({ type: "CHANGE_PLAYING", payload: false });
   };
 
   const handleReplay = () => {
-    if (!player) return;
-
-    player.currentTime = 0;
-    document.dispatchEvent(
-      new CustomEvent("movepin", { detail: player.currentTime })
-    );
+    dispatch({ type: "CHANGE_CURRENT_TIME", payload: 0 });
+    document.dispatchEvent(new CustomEvent("movepin", { detail: 0 }));
   };
 
   return (

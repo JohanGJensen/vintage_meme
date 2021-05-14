@@ -1,70 +1,96 @@
-import React, { useState, useLayoutEffect, useRef } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 // style
 import injectSheet from "react-jss";
 import { styles } from "../../../style/style";
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 // components
 import VideoPlayerPin from "./VideoPlayerPin";
 import TimelineSettings from "./TimelineSettings";
 
 const Timeline = (props) => {
+  const dispatch = useDispatch();
+
   const tracksContainerEl = useRef(null);
   const [animation, setAnimation] = useState(undefined);
+  const [duration, setDuration] = useState(0);
 
-  const { classes } = props;
+  const { classes, tracks } = props;
   const state = useSelector((state) => state);
-  const { selectedVideo } = state;
+  const { playing, currentTime } = state;
+
+  useEffect(() => {
+    setDuration(state.duration * 1000);
+  }, [state.duration]);
 
   useLayoutEffect(() => {
-    if (!selectedVideo) return;
+    !playing && cancelAnimationFrame(animation);
+  }, [playing, animation]);
 
-    const updatePinPosition = () => {
-      const time = selectedVideo.currentTime;
-      const progress = (100 / state.duration) * time;
-      const pinEvent = new CustomEvent("movepin", { detail: progress });
+  useEffect(() => {
+    const updatePinPosition = (start, ts) => {
+      const now = new Date().getTime();
+      const runtime = now - start + ts;
+      const progress = runtime / duration;
 
-      if (100 >= progress || selectedVideo.paused) {
+      const pinEvent = new CustomEvent("movepin", { detail: 100 * progress });
+
+      dispatch({ type: "CHANGE_CURRENT_TIME", payload: runtime });
+
+      if (runtime < duration) {
         document.dispatchEvent(pinEvent);
-        setAnimation(requestAnimationFrame(updatePinPosition));
+        setAnimation(requestAnimationFrame(() => updatePinPosition(start, ts)));
+      } else {
+        dispatch({ type: "CHANGE_PLAYING", payload: false });
       }
     };
 
-    const onPlay = () => {
-      setAnimation(requestAnimationFrame(updatePinPosition));
-    };
-
-    const onPause = () => {
-      cancelAnimationFrame(animation);
-    };
-
-    selectedVideo.addEventListener("play", onPlay);
-    selectedVideo.addEventListener("pause", onPause);
-
-    return () => {
-      selectedVideo.removeEventListener("play", onPlay);
-      selectedVideo.removeEventListener("pause", onPause);
-    };
-  }, [selectedVideo, animation]);
+    if (playing) {
+      setAnimation(
+        requestAnimationFrame(() => {
+          updatePinPosition(new Date().getTime(), currentTime);
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing, duration]);
 
   return (
     <section className={classes.timeline}>
       <TimelineSettings />
       <div className={"tracks-container"} ref={tracksContainerEl}>
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "30px",
-            background: "#ffffff",
-            borderRadius: "15px 15px 0 0",
-          }}
-        >
-          <VideoPlayerPin
-            parent={tracksContainerEl.current || null}
-            video={selectedVideo}
-          />
-        </div>
+        <div className={"tracks-container-header"} />
+        <VideoPlayerPin parent={tracksContainerEl.current || null} />
+
+        {state &&
+          tracks.map((track, index) => {
+            return (
+              <div
+                key={index}
+                style={{
+                  width: "100%",
+                  height: "40px",
+                  borderBottom: "solid 1px black",
+                }}
+              >
+                <div
+                  style={{
+                    left: "0",
+                    width: `${
+                      (100 / state.duration) * 39.96 // current video duration
+                    }%`,
+                    height: "100%",
+                    backgroundColor: "#878787",
+                    cursor: "pointer",
+                  }}
+                >
+                  <h6 style={{ margin: "0", color: "#000000" }}>
+                    {track.name}
+                  </h6>
+                </div>
+              </div>
+            );
+          })}
       </div>
     </section>
   );
