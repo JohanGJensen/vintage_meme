@@ -27,7 +27,7 @@ const Media = (props) => {
   return (
     <>
       {isActive && (
-        <video ref={mediaRef} crossOrigin="anonymous" muted>
+        <video ref={mediaRef} crossOrigin="*" muted>
           <source src={source} type={type} />
         </video>
       )}
