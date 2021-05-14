@@ -67,7 +67,6 @@ const Timeline = (props) => {
           tracks.map((track, index) => {
             return (
               <Track
-                classes={classes}
                 key={index}
                 state={state}
                 name={track.name}

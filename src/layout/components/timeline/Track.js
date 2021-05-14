@@ -1,4 +1,7 @@
 import React from "react";
+// style
+import injectSheet from "react-jss";
+import { styles } from "../../../style/style";
 
 const Track = (props) => {
   const { classes, name = "generic", duration = 0, state } = props;
@@ -18,4 +21,4 @@ const Track = (props) => {
   );
 };
 
-export default Track;
+export default injectSheet(styles)(Track);
