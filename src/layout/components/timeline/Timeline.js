@@ -26,10 +26,10 @@ const Timeline = (props) => {
         <VideoPlayerPin parent={tracksContainerEl.current || null} />
 
         {state &&
-          tracks.map((track, index) => {
+          tracks.map((track) => {
             return (
               <Track
-                key={index}
+                key={track.id}
                 state={state}
                 name={track.name}
                 duration={track.duration}
