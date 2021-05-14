@@ -1,60 +1,22 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import React, { useRef } from "react";
 // style
 import injectSheet from "react-jss";
 import { styles } from "../../../style/style";
 // redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // components
 import VideoPlayerPin from "./VideoPlayerPin";
 import TimelineSettings from "./TimelineSettings";
 import Track from "./Track";
+// hooks
+import { useAnimationFrame } from "../../../state/hooks/useAnimationFrame";
 
 const Timeline = (props) => {
-  const dispatch = useDispatch();
-
-  const tracksContainerEl = useRef(null);
-  const [animation, setAnimation] = useState(undefined);
-  const [duration, setDuration] = useState(0);
-
   const { classes, tracks } = props;
+  const tracksContainerEl = useRef(null);
   const state = useSelector((state) => state);
-  const { playing, currentTime } = state;
 
-  useEffect(() => {
-    setDuration(state.duration * 1000);
-  }, [state.duration]);
-
-  useLayoutEffect(() => {
-    !playing && cancelAnimationFrame(animation);
-  }, [playing, animation]);
-
-  useEffect(() => {
-    const updatePinPosition = (start, ts) => {
-      const now = new Date().getTime();
-      const runtime = now - start + ts;
-      const progress = runtime / duration;
-
-      const pinEvent = new CustomEvent("movepin", { detail: 100 * progress });
-
-      dispatch({ type: "CHANGE_CURRENT_TIME", payload: runtime });
-
-      if (runtime < duration) {
-        document.dispatchEvent(pinEvent);
-        setAnimation(requestAnimationFrame(() => updatePinPosition(start, ts)));
-      } else {
-        dispatch({ type: "CHANGE_PLAYING", payload: false });
-      }
-    };
-
-    if (playing) {
-      setAnimation(
-        requestAnimationFrame(() => {
-          updatePinPosition(new Date().getTime(), currentTime);
-        })
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playing, duration]);
+  useAnimationFrame();
 
   return (
     <section className={classes.timeline}>
