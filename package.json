@@ -2,7 +2,7 @@
   "name": "dev-test-2019-starter",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://JohanGJensen.github.io/vintage_meme",
+  "homepage": "https://JohanGJensen.github.io/video_editor",
   "dependencies": {
     "@material-ui/icons": "^4.11.2",
     "gh-pages": "^2.0.1",
