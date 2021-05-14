@@ -9,7 +9,7 @@ import VideoPlayerPin from "./VideoPlayerPin";
 import TimelineSettings from "./TimelineSettings";
 import Track from "./Track";
 // hooks
-import { useAnimationFrame } from "../../../state/hooks/useAnimationFrame";
+import { useAnimationFrame } from "../../hooks/useAnimationFrame";
 
 const Timeline = (props) => {
   const { classes, tracks } = props;
