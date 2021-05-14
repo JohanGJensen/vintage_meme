@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 // components
 import VideoPlayerPin from "./VideoPlayerPin";
 import TimelineSettings from "./TimelineSettings";
+import Track from "./Track";
 
 const Timeline = (props) => {
   const dispatch = useDispatch();
@@ -65,30 +66,13 @@ const Timeline = (props) => {
         {state &&
           tracks.map((track, index) => {
             return (
-              <div
+              <Track
+                classes={classes}
                 key={index}
-                style={{
-                  width: "100%",
-                  height: "40px",
-                  borderBottom: "solid 1px black",
-                }}
-              >
-                <div
-                  style={{
-                    left: "0",
-                    width: `${
-                      (100 / state.duration) * 39.96 // current video duration
-                    }%`,
-                    height: "100%",
-                    backgroundColor: "#878787",
-                    cursor: "pointer",
-                  }}
-                >
-                  <h6 style={{ margin: "0", color: "#000000" }}>
-                    {track.name}
-                  </h6>
-                </div>
-              </div>
+                state={state}
+                name={track.name}
+                duration={track.duration}
+              />
             );
           })}
       </div>

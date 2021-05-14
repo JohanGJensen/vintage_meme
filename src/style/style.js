@@ -69,6 +69,26 @@ export const styles = (theme) => ({
       },
     },
   },
+
+  trackContainer: {
+    width: "100%",
+    height: "40px",
+    borderBottom: "solid 1px black",
+  },
+  track: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    backgroundColor: "#878787",
+    cursor: "pointer",
+  },
+  trackText: {
+    margin: "0",
+    color: "#000000",
+    userSelect: "none",
+  },
+
   playerpin: {
     position: "absolute",
     top: "30px",
